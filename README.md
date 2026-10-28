@@ -2,6 +2,10 @@
 
 A web-based Library Management System built with Next.js and Supabase to help librarians manage books, members, book circulation, and reservations.
 
+# Live Demo
+
+Live Website:https://librarymanagementsystem-sigma-gules.vercel.app/
+
 ## Technologies Used
 
 - Next.js (App Router)
