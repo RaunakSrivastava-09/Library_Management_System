@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Library Management System
 
-## Getting Started
+A web-based Library Management System built with Next.js and Supabase to help librarians manage books, members, book circulation, and reservations.
 
-First, run the development server:
+## Technologies Used
+
+- Next.js (App Router)
+- JavaScript
+- Supabase (PostgreSQL database and authentication)
+- Zod (server-side input validation)
+- Vitest (automated testing)
+
+## Features
+
+- Librarian authentication
+- Book management with title, author, ISBN, category, and copy counts
+- Member management
+- Book issue and return management
+- Automatic 14-day loan period
+- Overdue fine calculation at ₹5 per day
+- Book reservations with a first-come, first-served queue
+- Book search by title, author, or ISBN
+- Responsive interface
+- Automated tests for fine calculations and input validation
+
+## Prerequisites
+
+Install the following:
+
+- Node.js (LTS version)
+- npm
+- A Supabase account
+- Git (optional)
+
+## Installation
+
+1. Clone or download the project.
+2. Open the project folder in your terminal.
+3. Install dependencies:
+
+   ```bash
+   npm install
+   npm install @supabase/supabase-js @supabase/ssr zod
+   npm install -D vitest
+   ```
+
+4. Create a `.env.local` file in the project root:
+
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+   ```
+
+5. Create a Supabase project and copy its Project URL and publishable key into `.env.local`.
+
+6. Open the Supabase SQL Editor and execute `supabase/schema.sql`.
+
+7. Execute `supabase/seed.sql` to insert the sample books and members.
+
+8. Create a librarian user through Supabase Authentication. Insert a matching profile into the `public.librarians` table using that user's authentication ID and a name.
+
+## Running the Application
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Running Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Execute the automated tests:
 
-## Learn More
+```bash
+npm test
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Never expose a Supabase secret or service-role key in client-side code.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+app/          Next.js pages and API routes
+components/   Reusable UI components
+lib/          Supabase clients, validation, authentication, and utilities
+supabase/     Database schema and sample data
+tests/        Automated tests
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- Only authorized librarians should access management operations.
+- Sample data is intended for development and demonstration.
+- Configure the Supabase database policies and authentication before using the application.
